@@ -316,7 +316,7 @@
     document.getElementById('sidebar').classList.toggle('open');
   });
 
-  document.getElementById('lab-link').onclick=()=>{document.getElementById('hero').style.display='none';document.getElementById('lesson').style.display='none';document.getElementById('lab').hidden=false;document.getElementById('sidebar').classList.remove('open');if(window.DART_LAB_FOCUS)window.GIT_LAB_FOCUS();};
+  document.getElementById('lab-link').onclick=()=>{document.getElementById('hero').style.display='none';document.getElementById('lesson').style.display='none';document.getElementById('lab').hidden=false;document.getElementById('sidebar').classList.remove('open');if(window.DART_LAB_FOCUS)window.DART_LAB_FOCUS();};
   document.getElementById('home-link').onclick=()=>{document.getElementById('lab').hidden=true;document.getElementById('lesson').style.display='none';document.getElementById('hero').style.display='block';};
   document.getElementById('start-btn').onclick=()=>{document.querySelector('.nav-item').click();};
 

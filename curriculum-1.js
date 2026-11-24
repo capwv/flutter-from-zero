@@ -398,6 +398,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }` },
+    { type: 'note', warn: true, text: 'تنبيه لو نزلت أحدث إصدار Flutter: من Flutter 3.50 المكتبة `package:flutter/material.dart` اتصنفت deprecated، وممكن يظهرلك تحذير في المحرر. الكود في الكورس ده لسه بيشتغل بنفس الشكل. عشان تتخلص من التحذير شغل `dart fix --apply --code=migrate_design_widgets` وهو بيبدل الاستيراد لوحده، أو ضيف الباكدج `material_ui` وغير الاستيراد لـ `package:material_ui/material_ui.dart`. باقي الكود (Scaffold و Text وغيرهم) مفيش فيه أي تغيير.' },
     { type: 'list', items: [
       '`import`: بنجيب مكتبة Material — فيها كل الـ widgets الجاهزة بتصميم Google.',
       '`void main()`: نقطة البداية، زي أي برنامج Dart. بتنده `runApp` وتديلها أول widget.',

@@ -18,7 +18,7 @@ CURRICULUM.push(
 )` },
     { type: 'p', text: '`ListTile` هي widget جاهزة لصفوف القوائم: `leading` (أيقونة أو صورة في الأول)، `title` (العنوان الرئيسي)، `subtitle` (سطر تاني أصغر)، `trailing` (حاجة في الآخر زي سهم)، و `onTap` (اللي يحصل لما تدوس عليها).' },
     { type: 'h', text: 'ListView.builder: للقوائم الطويلة' },
-    { type: 'p', text: 'لو عندك 1000 عنصر، مش هتكتبهم بإيدك، ومش صح تحملهم كلهم مرة واحدة. `ListView.builder` بتبني العنصر لما يحتاج يظهر على الشاشة بس — دي اسمها lazy loading:' },
+    { type: 'p', text: 'لو عندك 1000 عنصر، مش هتكتبهم بإيدك، ومش صح تحملهم كلهم مرة واحدة. `ListView.builder` بتبني العنصر لما يحتاج يظهر على الشاشة بس, دي اسمها lazy loading:' },
     { type: 'code', code: `final tasks = ['أذاكر Dart', 'أعمل مشروع', 'أراجع الكود', 'أنام بدري'];
 
 ListView.builder(
@@ -30,7 +30,7 @@ ListView.builder(
     );
   },
 )` },
-    { type: 'p', text: 'دالة `itemBuilder` بتتنده لكل عنصر ظاهر، وبتوصلها قيمة `index` — تستخدمها عشان تجيب البيانات المناسبة من قايمتك.' },
+    { type: 'p', text: 'دالة `itemBuilder` بتتنده لكل عنصر ظاهر، وبتوصلها قيمة `index`, تستخدمها عشان تجيب البيانات المناسبة من قايمتك.' },
     { type: 'note', text: 'لاحظ السهم في `(context, index) { ... }`: دي function بتتبعت كـ parameter. اسمها callback، وهتشوفها في كل حتة في Flutter: onPressed و itemBuilder وغيرهم.' },
     { type: 'h', text: 'قايمة ديناميكية من بيانات' },
     { type: 'p', text: 'في الواقع العملي، البيانات بتيجي من قايمة Dart زي اللي اتعلمناها في درس Dart. تقدر كمان تعمل class بيمثل العنصر الواحد:' },
@@ -44,20 +44,20 @@ final tasks = [
   Task('أذاكر Dart', true),
   Task('أعمل مشروع', false),
 ];` },
-    { type: 'p', text: 'وبعدين في الـ itemBuilder تبني شكل مختلف حسب حالة العنصر — مثلاً نص مشطوب لو المهمة خلصت. دي الفكرة اللي هنكمل عليها في المشروع الختامي.' }
+    { type: 'p', text: 'وبعدين في الـ itemBuilder تبني شكل مختلف حسب حالة العنصر, مثلاً نص مشطوب لو المهمة خلصت. دي الفكرة اللي هنكمل عليها في المشروع الختامي.' }
   ],
   quiz: [
     { q: 'ليه ListView.builder أحسن من ListView العادية للقوائم الطويلة؟', options: [
       { text: 'لأنها بتبني العناصر عند الحاجة بس (اللي ظاهر على الشاشة) فبتوفر ذاكرة وأداء' },
-      { text: 'لأنها شكلها أحلى' },
-      { text: 'لأنها الوحيدة اللي بتعمل scroll' },
-      { text: 'مفيش فرق بينهم' }
-    ], answer: 0, explain: 'builder بتعمل lazy loading: العناصر بتتبني لما تقرب تظهر. القايمة العادية بتبني كل حاجة مرة واحدة — كارثة مع آلاف العناصر.' },
+      { text: 'لأنها شكلها أحلى وأسرع في الأنيميشن من ListView العادية' },
+      { text: 'لأنها الوحيدة اللي بتعمل scroll، والـ ListView العادية مبتتحركش' },
+      { text: 'مفيش فرق بينهم في الأداء، دي مجرد طريقة تانية للكتابة' }
+    ], answer: 0, explain: 'builder بتعمل lazy loading: العناصر بتتبني لما تقرب تظهر. القايمة العادية بتبني كل حاجة مرة واحدة, كارثة مع آلاف العناصر.' },
     { q: 'في itemBuilder، المتغير index بيمثل إيه؟', options: [
       { text: 'رقم العنصر اللي بيتبني دلوقتي في القايمة (من صفر)' },
-      { text: 'عدد العناصر الكلي' },
-      { text: 'مكان الـ widget في الشاشة بالبيكسل' },
-      { text: 'اسم الـ ListView' }
+      { text: 'عدد العناصر الكلي في القايمة اللي بتتعرض على الشاشة' },
+      { text: 'مكان الـ widget على الشاشة بالبيكسل من الحافة العلوية' },
+      { text: 'اسم الـ ListView اللي بتبني عناصرها جوه الـ itemBuilder' }
     ], answer: 0, explain: 'itemBuilder بتتنده لكل عنصر مع رقمه index، وانت بتستخدمه عشان تجيب tasks[index] مثلاً.' },
     { q: 'إيه الـ widget الجاهزة اللي بتديك صف قايمة فيه أيقونة وعنوان وسطر تاني وسهم؟', options: [
       { text: 'Container', mono: true },
@@ -86,7 +86,7 @@ ListView.builder(
     subtitle: Text('صديق رقم \${index + 1}'),
   );
 }`,
-      why: 'التحويل من index (من صفر) لرقم مفهوم للناس (من 1) بيتعمل بـ \${index + 1} — interpolation جوه نص زي ما اتعلمنا في Dart.' }
+      why: 'التحويل من index (من صفر) لرقم مفهوم للناس (من 1) بيتعمل بـ \${index + 1}, interpolation جوه نص زي ما اتعلمنا في Dart.' }
   ]
 },
 {
@@ -97,7 +97,7 @@ ListView.builder(
   blocks: [
     { type: 'p', text: 'التطبيق الحقيقي مش شاشة واحدة: شاشة قايمة، شاشة تفاصيل، شاشة إعدادات. الانتقال بينهم في Flutter بيتعمل بـ `Navigator`، وفكرته بسيطة: شاشاتك متكومة فوق بعض زي الكروت (stack). لما تفتح شاشة جديدة بتتحط فوق (push)، ولما ترجع بتتشال (pop).' },
     { type: 'h', text: 'افتح شاشة جديدة: push' },
-    { type: 'p', text: 'أول حاجة بنعمل كلاس للشاشة الجديدة — هي في الآخر widget عادية فيها Scaffold:' },
+    { type: 'p', text: 'أول حاجة بنعمل كلاس للشاشة الجديدة, هي في الآخر widget عادية فيها Scaffold:' },
     { type: 'code', code: `class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key});
 
@@ -116,7 +116,7 @@ ListView.builder(
     MaterialPageRoute(builder: (context) => const DetailsScreen()),
   );
 }` },
-    { type: 'p', text: 'بلاقي تلقائياً سهم رجوع في الـ AppBar — Flutter بتضيفه لوحدها لما تفتح شاشة بـ push. ولو عايز ترجع بالكود:' },
+    { type: 'p', text: 'بلاقي تلقائياً سهم رجوع في الـ AppBar, Flutter بتضيفه لوحدها لما تفتح شاشة بـ push. ولو عايز ترجع بالكود:' },
     { type: 'code', code: `onPressed: () {
   Navigator.pop(context);
 }` },
@@ -160,9 +160,9 @@ Navigator.pop(context, noteText);` },
   quiz: [
     { q: 'فكرة Navigator الأساسية إن الشاشات:', options: [
       { text: 'متكومة فوق بعض (stack): push بيضيف شاشة فوق و pop بيشيلها ويرجعك للي قبلها' },
-      { text: 'بتتخزن في قاعدة بيانات' },
-      { text: 'بتتبدل بشكل عشوائي' },
-      { text: 'بتتحمل من الإنترنت' }
+      { text: 'بتتخزن في قاعدة بيانات وبتتحمل منها لما المستخدم يفتح الصفحة' },
+      { text: 'بتتبدل بشكل عشوائي كل ما المستخدم يضغط على زرار جديد' },
+      { text: 'بتتحمل من الإنترنت كل مرة بدل ما تتحفظ على الجهاز' }
     ], answer: 0, explain: 'زي كومة كروت: push يحط كارت فوق، pop يشيله ويرجعك للكارت اللي تحته.' },
     { q: 'أسهل طريقة تبعت بيها نص من شاشة لشاشة تانية:', options: [
       { text: 'تحفظه في ملف على الجهاز وتقراه من الشاشة التانية' },
@@ -200,7 +200,7 @@ ElevatedButton(
   },
   child: const Text('افتح الإعدادات'),
 )`,
-      why: 'لاحظ إنك مش محتاج تكتب زرار رجوع — AppBar بتضيفه لوحدها لما تكون الشاشة مفتوحة بـ push.' },
+      why: 'لاحظ إنك مش محتاج تكتب زرار رجوع, AppBar بتضيفه لوحدها لما تكون الشاشة مفتوحة بـ push.' },
     { task: 'عدّل شاشة التفاصيل بحيث تستقبل رقم المهمة واسمها مع بعض، واعرضهم.', hint: 'constructor بياخد parameterين: final int number و final String title.', code: `class DetailsScreen extends StatelessWidget {
   final int number;
   final String title;
@@ -233,7 +233,7 @@ Navigator.push(
   blocks: [
     { type: 'p', text: 'لحد دلوقتي كل شاشاتنا كانت ثابتة. بس التطبيقات الحقيقية فيها حاجات بتتغير: عداد بيزيد، checkbox بتتعلم، قايمة بتتحدث. البيانات المتغيرة دي اسمها state (حالة)، وإدارتها هي قلب شغل Flutter.' },
     { type: 'h', text: 'الفكرة في جملة: الواجهة = دالة من الحالة' },
-    { type: 'p', text: 'في Flutter الواجهة بتعكس الحالة الحالية. لما الحالة تتغير، انت مش بتعدل الواجهة بإيدك — انت بتقول لـ Flutter "الحالة اتغيرت" وهي بتعيد بناء الواجهة لوحدها. الأمر اللي بيقول كده اسمه `setState`.' },
+    { type: 'p', text: 'في Flutter الواجهة بتعكس الحالة الحالية. لما الحالة تتغير، انت مش بتعدل الواجهة بإيدك, انت بتقول لـ Flutter "الحالة اتغيرت" وهي بتعيد بناء الواجهة لوحدها. الأمر اللي بيقول كده اسمه `setState`.' },
     { type: 'h', text: 'StatefulWidget من جوه' },
     { type: 'p', text: 'الـ StatefulWidget بتتكتب في كلاسين: الأول الـ widget نفسها (ثابتة)، والتاني كلاس الـ State اللي فيه المتغيرات المتغيرة ودالة build:' },
     { type: 'code', code: `class CounterScreen extends StatefulWidget {
@@ -269,27 +269,27 @@ class _CounterScreenState extends State<CounterScreen> {
     { type: 'h', text: 'ليه كلاسين؟ وليه المتغيرات في State؟' },
     { type: 'p', text: 'الـ widget نفسها ممكن تتدمر وتتبني من جديد كتير جداً أثناء شغل التطبيق، فلو الحالة متخزنة فيها هتضيع مع كل rebuild. عشان كده Flutter بتحتفظ بكلاس الـ State منفصل وثابت، والـ widget بس بتوصف الشكل. عشان كده بتلاقي بنية الـ StatefulWidget فيها `createState` بترجع نسخة من كلاس الـ State.' },
     { type: 'h', text: 'فين نحط الحالة؟' },
-    { type: 'p', text: 'قاعدة عملية: حط الحالة في أقرب مكان مشترك بين كل الـ widgets اللي محتاجاها. لو عداد في شاشة واحدة، حطه في شاشتها. لو بيانات محتاجاها شاشتين، ارفعها للـ widget الأب المشترك بينهم (وده اسمه lifting state up). في التطبيقات الكبيرة في أنظمة إدارة حالة متقدمة زي Provider و Riverpod — بس دي خطوة بعد الكورس ده.' }
+    { type: 'p', text: 'قاعدة عملية: حط الحالة في أقرب مكان مشترك بين كل الـ widgets اللي محتاجاها. لو عداد في شاشة واحدة، حطه في شاشتها. لو بيانات محتاجاها شاشتين، ارفعها للـ widget الأب المشترك بينهم (وده اسمه lifting state up). في التطبيقات الكبيرة في أنظمة إدارة حالة متقدمة زي Provider و Riverpod, بس دي خطوة بعد الكورس ده.' }
   ],
   quiz: [
     { q: 'غيرت قيمة متغير والشاشة ماتحدثتش. السبب الأغلب:', options: [
       { text: 'نسيت تحط التغيير جوه setState', mono: true },
-      { text: 'نسخة Flutter قديمة' },
+      { text: 'نسخة Flutter قديمة ولازم تتحدث عشان setState تشتغل صح' },
       { text: 'لازم تضغط R للـ hot restart' },
-      { text: 'المتغير مش موجود أصلاً' }
+      { text: 'المتغير مش موجود أصلاً في الكلاس وده سبب إن القيمة متغيرتش' }
     ], answer: 0, explain: 'setState هي اللي بتقول لـ Flutter تعيد بناء الواجهة. تغيير المتغير لوحده بيحصل في الذاكرة بس.' },
     { q: 'في StatefulWidget، المتغيرات اللي بتتغير بتتخزن فين؟', options: [
       { text: 'في كلاس الـ widget نفسها' },
       { text: 'في كلاس الـ State المنفصل' },
-      { text: 'في pubspec.yaml' },
-      { text: 'في دالة build' }
+      { text: 'في ملف pubspec.yaml مع باقي الإعدادات الخاصة بالمشروع كله' },
+      { text: 'في دالة build نفسها وبتتعرف من أول وجديد كل مرة بتتنده' }
     ], answer: 1, explain: 'الـ widget بتتدمر وتتبني كتير، فالحالة بتعيش في كلاس الـ State الثابت عشان متضيعش.' },
     { q: 'إيه اللي بيحصل لما setState بتتنده؟', options: [
-      { text: 'التطبيق بيقفل ويفتح من جديد' },
+      { text: 'التطبيق بيقفل ويفتح من جديد عشان يطبق القيم الجديدة كلها' },
       { text: 'Flutter بتعيد تنفيذ دالة build فالشاشة بتتحدث بالقيم الجديدة' },
-      { text: 'البيانات بتتبعت للسيرفر' },
-      { text: 'المتغيرات بترجع لقيمها الأولى' }
-    ], answer: 1, explain: 'setState بتحجز rebuild: دالة build بتتنفذ تاني والواجهة بتتحدث بالحالة الجديدة — ده قلب فلسفة Flutter كلها.' }
+      { text: 'البيانات بتتبعت للسيرفر عشان يتأكد من القيم الجديدة بتاعتك' },
+      { text: 'المتغيرات بترجع لقيمها الأولى وبتتمسح التعديلات اللي عملتها' }
+    ], answer: 1, explain: 'setState بتحجز rebuild: دالة build بتتنفذ تاني والواجهة بتتحدث بالحالة الجديدة, ده قلب فلسفة Flutter كلها.' }
   ],
   exercises: [
     { task: 'اعمل عداد فيه زرارين: واحد يزود وواحد ينقص، مع عرض الرقم الحالي في النص.', hint: 'زرارين بيغيروا نفس المتغير، كل واحد جوه setState لوحده.', code: `class _CounterScreenState extends State<CounterScreen> {
@@ -318,7 +318,7 @@ class _CounterScreenState extends State<CounterScreen> {
   }
 }`,
       why: 'لاحظ الاختصار: لما الـ callback سطر واحد نقدر نكتبه بالسهم => بدل الأقواس. والاتنين بيستخدموا setState.' },
-    { task: 'ضيف زرار "تصفير" يرجع العداد لصفر، بس اظهره بس لما العداد أكبر من صفر.', hint: 'استخدم if جوه children قايمة الـ widgets — دي ميزة في Dart اسمها collection if.', code: `Row(
+    { task: 'ضيف زرار "تصفير" يرجع العداد لصفر، بس اظهره بس لما العداد أكبر من صفر.', hint: 'استخدم if جوه children قايمة الـ widgets, دي ميزة في Dart اسمها collection if.', code: `Row(
   mainAxisAlignment: MainAxisAlignment.center,
   children: [
     IconButton(
@@ -337,7 +337,7 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
   ],
 )`,
-      why: 'if جوه قايمة children بتظهر الـ widget بشرط. دي طريقة Flutter في إظهار وإخفاء العناصر — مش display: none زي الويب.' }
+      why: 'if جوه قايمة children بتظهر الـ widget بشرط. دي طريقة Flutter في إظهار وإخفاء العناصر, مش display: none زي الويب.' }
   ]
 },
 {
@@ -346,7 +346,7 @@ class _CounterScreenState extends State<CounterScreen> {
   title: 'الفورمز: TextField والتحقق من المدخلات',
   subtitle: 'إزاي تاخد إدخال من المستخدم وتتأكد إنه صح قبل الاستخدام',
   blocks: [
-    { type: 'p', text: 'تسجيل الدخول، البحث، إضافة ملاحظة — كلها فورمز. في Flutter أساس التعامل مع إدخال النص هو `TextField` مع صاحبه `TextEditingController`، وفوقهم نظام `Form` للتحقق من المدخلات قبل استخدامها.' },
+    { type: 'p', text: 'تسجيل الدخول، البحث، إضافة ملاحظة, كلها فورمز. في Flutter أساس التعامل مع إدخال النص هو `TextField` مع صاحبه `TextEditingController`، وفوقهم نظام `Form` للتحقق من المدخلات قبل استخدامها.' },
     { type: 'h', text: 'TextField و Controller' },
     { type: 'code', code: `class _NoteScreenState extends State<NoteScreen> {
   final noteController = TextEditingController();
@@ -405,7 +405,7 @@ Form(
       ElevatedButton(
         onPressed: () {
           if (formKey.currentState!.validate()) {
-            // كل الحقول صح — كمل
+            // كل الحقول صح, كمل
           }
         },
         child: const Text('سجل'),
@@ -422,14 +422,14 @@ Form(
       ['IconButton', 'زرار أيقونة بس'],
       ['FloatingActionButton', 'الزرار الدائري العائم للإجراء الأساسي']
     ] },
-    { type: 'note', text: 'عايز تبعت للمستخدم رسالة سريعة بعد الحفظ؟ استخدم `SnackBar`: `ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("اتحفظت!")));` — بتظهر شريط صغير تحت ويختفي لوحده.' }
+    { type: 'note', text: 'عايز تبعت للمستخدم رسالة سريعة بعد الحفظ؟ استخدم `SnackBar`: `ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("اتحفظت!")));`, بتظهر شريط صغير تحت ويختفي لوحده.' }
   ],
   quiz: [
     { q: 'إزاي تقرا النص اللي المستخدم كتبه في TextField؟', options: [
       { text: 'من الـ TextEditingController المربوط بالحقل: controller.text' },
-      { text: 'الحقل بيبعت النص لوحده في الإيميل' },
+      { text: 'الحقل بيبعت النص لوحده في إيميل أول ما المستخدم يكتب فيه' },
       { text: 'من الـ AppBar' },
-      { text: 'مش ممكن قرايته قبل الطباعة' }
+      { text: 'مش ممكن تقراه إلا بعد ما المستخدم يضغط زرار الإرسال ويتخزن في ملف' }
     ], answer: 0, explain: 'الـ controller هو حلقة الوصل: تقراه بـ controller.text وتمسحه بنفس الطريقة بعد الحفظ مثلاً.' },
     { q: 'في TextFormField، الـ validator بترجع إيه لو الحقل سليم؟', options: [
       { text: 'true', mono: true },
@@ -438,11 +438,11 @@ Form(
       { text: '0', mono: true }
     ], answer: 1, explain: 'null معناها مفيش خطأ. أي نص بترجعه بيظهر كرسالة خطأ تحت الحقل.' },
     { q: 'إيه وظيفة formKey.currentState!.validate()؟', options: [
-      { text: 'بتمسح الفورم' },
+      { text: 'بتمسح الفورم وبترجع كل الحقول فاضية كأن المستخدم لسه مكتبش حاجة' },
       { text: 'بتنفذ كل الـ validators وترجع true لو الفورم كلها سليمة' },
-      { text: 'بتقفل التطبيق' },
-      { text: 'بتحفظ البيانات في قاعدة البيانات' }
-    ], answer: 1, explain: 'validate() بتشغل التحقق على كل الحقول مرة واحدة — لو رجعت true تقدر تكمل حفظ أو إرسال.' }
+      { text: 'بتقفل التطبيق وبترجع بالمستخدم للشاشة الرئيسية بعد الفحص' },
+      { text: 'بتحفظ البيانات في قاعدة البيانات مباشرة من غير فحص الحقول' }
+    ], answer: 1, explain: 'validate() بتشغل التحقق على كل الحقول مرة واحدة, لو رجعت true تقدر تكمل حفظ أو إرسال.' }
   ],
   exercises: [
     { task: 'اعمل فورم تسجيل دخول بسيطة: حقل إيميل وحقل باسورد (مخفي)، وزرار دخول يتحقق إن الاتنين مش فاضيين.', hint: 'obscureText: true بتخفي الباسورد، و validator لكل حقل.', code: `final formKey = GlobalKey<FormState>();
@@ -486,7 +486,7 @@ Form(
   }
   return null;
 },`,
-      why: 'الـ validator بترجع أول مشكلة تلاقيها — الترتيب مهم: الأول الفحص الفاضي وبعدين الطول.' }
+      why: 'الـ validator بترجع أول مشكلة تلاقيها, الترتيب مهم: الأول الفحص الفاضي وبعدين الطول.' }
   ]
 },
 {
@@ -495,7 +495,7 @@ Form(
   title: 'الثيمات: شكل موحد لتطبيقك كله',
   subtitle: 'ThemeData و ColorScheme والوضع الليلي واستخدام الثيم في أي widget',
   blocks: [
-    { type: 'p', text: 'لحد دلوقتي بنحدد الألوان والأحجام يدوي في كل widget. ده بيخلّي التطبيق مش متناسق، وأي تعديل في الهوية البصرية هيتكرر في 100 مكان. الحل: `ThemeData` — ملف واحد بيعرّف شكل تطبيقك كله من مكان واحد.' },
+    { type: 'p', text: 'لحد دلوقتي بنحدد الألوان والأحجام يدوي في كل widget. ده بيخلّي التطبيق مش متناسق، وأي تعديل في الهوية البصرية هيتكرر في 100 مكان. الحل: `ThemeData`, ملف واحد بيعرّف شكل تطبيقك كله من مكان واحد.' },
     { type: 'h', text: 'ThemeData في MaterialApp' },
     { type: 'code', code: `MaterialApp(
   theme: ThemeData(
@@ -504,7 +504,7 @@ Form(
   ),
   home: const HomeScreen(),
 )` },
-    { type: 'p', text: 'أحلى حاجة في الموضوع: `ColorScheme.fromSeed` بتاخد لون واحد (الـ seed) وتولد منه نظام ألوان كامل متناسق — أساسي وثانوي وخلفيات — بناءً على مواصفة Material 3 بتاعة Google. مش محتاج تكون مصمم عشان تطلع بألوان حلوة.' },
+    { type: 'p', text: 'أحلى حاجة في الموضوع: `ColorScheme.fromSeed` بتاخد لون واحد (الـ seed) وتولد منه نظام ألوان كامل متناسق, أساسي وثانوي وخلفيات, بناءً على مواصفة Material 3 بتاعة Google. مش محتاج تكون مصمم عشان تطلع بألوان حلوة.' },
     { type: 'h', text: 'استخدم الثيم جوه الـ widgets' },
     { type: 'p', text: 'بدل ما تكتب لون صريح، اسأل الثيم الحالي عن اللون المناسب. كده لما تغير الثيم، كل حاجة هتتغير معاه:' },
     { type: 'code', code: `Container(
@@ -539,15 +539,15 @@ Form(
   quiz: [
     { q: 'إيه فايدة ColorScheme.fromSeed؟', options: [
       { text: 'بتولد نظام ألوان كامل متناسق من لون واحد' },
-      { text: 'بتزرع بيانات تجريبية في التطبيق' },
-      { text: 'بتختار لون عشوائي كل مرة' },
+      { text: 'بتزرع بيانات تجريبية في التطبيق عشان تختبر الشاشات بسرعة' },
+      { text: 'بتختار لون عشوائي كل مرة بيتفتح فيها التطبيق من جديد' },
       { text: 'بتحول الألوان لصور' }
-    ], answer: 0, explain: 'من لون seed واحد بتطلعلك palette كاملة حسب Material 3 — أساسي وثانوي وخلفيات ودرجاتهم.' },
+    ], answer: 0, explain: 'من لون seed واحد بتطلعلك palette كاملة حسب Material 3, أساسي وثانوي وخلفيات ودرجاتهم.' },
     { q: 'ليه نستخدم Theme.of(context).colorScheme.primary بدل Colors.blue الصريح؟', options: [
-      { text: 'لأن Colors.blue أبطأ في الأداء' },
+      { text: 'لأن Colors.blue أبطأ في الأداء وبيعمل lag في الشاشة' },
       { text: 'عشان لما الثيم يتغير (زي الوضع الليلي) كل الألوان تتحدث لوحدها من مكان واحد' },
-      { text: 'لأن Colors.blue اتشالت من Flutter' },
-      { text: 'مفيش فرق، دي عادة قديمة' }
+      { text: 'لأن Colors.blue اتشالت من Flutter في النسخ الجديدة ومبقتش شغالة' },
+      { text: 'مفيش فرق بين الاتنين، ودي عادة قديمة اتبعها المبرمجين زمان' }
     ], answer: 1, explain: 'الألوان الصريحة بتكسر التناسق والوضع الليلي. ألوان الثيم بتتبع التعريف المركزي في ThemeData.' },
     { q: 'عايز التطبيق يتبع الوضع الليلي بتاع إعدادات الموبايل نفسه. تكتب:', options: [
       { text: 'themeMode: ThemeMode.system', mono: true },
@@ -561,7 +561,7 @@ Form(
   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
   useMaterial3: true,
 ),`,
-      why: 'أول ما تحفظ، الـ FloatingActionButton والـ AppBar هيتلونوا بلون الـ seed ودرجاته تلقائياً — دي قوة الثيم المركزي.' },
+      why: 'أول ما تحفظ، الـ FloatingActionButton والـ AppBar هيتلونوا بلون الـ seed ودرجاته تلقائياً, دي قوة الثيم المركزي.' },
     { task: 'ضيف darkTheme لتطبيقك بنفس الـ seed بس Brightness.dark، وجرب الوضع الليلي من إعدادات المحاكي أو المتصفح.', hint: 'themeMode: ThemeMode.system يخلي التطبيق يتبع الجهاز.', code: `darkTheme: ThemeData(
   colorScheme: ColorScheme.fromSeed(
     seedColor: Colors.deepPurple,
@@ -570,7 +570,7 @@ Form(
   useMaterial3: true,
 ),
 themeMode: ThemeMode.system,`,
-      why: 'لو كنت مستخدم ألوان الثيم في شاشاتك، هتلاقي كل حاجة اتظبطت لوحدها في الليلي. لو في حتة لسه فاتحة، يبقى انت كاتب لون صريح هناك — دي علامة تدور عليها وتصلحها.' }
+      why: 'لو كنت مستخدم ألوان الثيم في شاشاتك، هتلاقي كل حاجة اتظبطت لوحدها في الليلي. لو في حتة لسه فاتحة، يبقى انت كاتب لون صريح هناك, دي علامة تدور عليها وتصلحها.' }
   ]
 },
 {
@@ -617,19 +617,19 @@ Future<void> loadPost() async {
     ] },
     { type: 'h', text: 'إزاي تختار package كويسة على pub.dev' },
     { type: 'list', items: [
-      'شوف عدد الـ likes و الـ pub points — المؤشرات دي بتقولك مدى ثقة المجتمع فيها.',
+      'شوف عدد الـ likes و الـ pub points, المؤشرات دي بتقولك مدى ثقة المجتمع فيها.',
       'اتأكد إنها متعلمة Flutter Favorite لو لقيت العلامة دي.',
       'شوف آخر تحديث: package متروكة من سنين ممكن تبوظ مع نسخ Flutter الجديدة.',
-      'اقرا صفحة الـ README بتاعتها — فيها مثال استخدام جاهز في أغلب الحالات.'
+      'اقرا صفحة الـ README بتاعتها, فيها مثال استخدام جاهز في أغلب الحالات.'
     ] },
     { type: 'note', warn: true, text: 'كل package بتضيفها بتكبر حجم تطبيقك وبتزود سطح المشاكل المحتملة. القاعدة: لو الحاجة بسيطة وتقدر تكتبها بنفسك في سطور قليلة، اكتبها. استخدم packages للحاجات المعقدة أو المملة فعلاً.' }
   ],
   quiz: [
     { q: 'فين بتتعرف الـ packages اللي مشروعك بيستخدمها؟', options: [
-      { text: 'في lib/main.dart' },
+      { text: 'في ملف lib/main.dart جوه الدالة main قبل runApp مباشرة' },
       { text: 'في pubspec.yaml تحت dependencies' },
-      { text: 'في ملف README' },
-      { text: 'في متجر التطبيقات' }
+      { text: 'في ملف README اللي بيوصف المشروع للناس اللي هتقراه' },
+      { text: 'في متجر التطبيقات اللي بيبقى مربوط بحساب المطور بتاعك' }
     ], answer: 1, explain: 'pubspec.yaml هو ملف إعدادات المشروع، وقسم dependencies فيه كل المكتبات الخارجية وأرقام نسخها.' },
     { q: 'عدلت pubspec.yaml بإيدك وضفت package. إيه الأمر اللي ينزلها؟', options: [
       { text: 'flutter run', mono: true },
@@ -638,10 +638,10 @@ Future<void> loadPost() async {
       { text: 'flutter clean', mono: true }
     ], answer: 1, explain: 'flutter pub get بيقرا الملف وينزل كل المكتبات المكتوبة فيه. (flutter pub add بتعمل الاتنين مع بعض: تعدل وتنزل.)' },
     { q: 'ليه بنستخدم async و await مع http.get؟', options: [
-      { text: 'عشان الكود يبقى أسرع في التنفيذ' },
+      { text: 'عشان الكود يبقى أسرع في التنفيذ ويخلص الطلب في وقت أقل' },
       { text: 'لأن طلب الإنترنت بياخد وقت، و await بتخلي الكود يستنى النتيجة من غير ما يعلق باقي التطبيق' },
-      { text: 'لأن Dart مش بتدعم الإنترنت من غيرهم' },
-      { text: 'مجرد تقليد في الكتابة ملوش معنى' }
+      { text: 'لأن Dart مش بتدعم طلبات الإنترنت من غيرهم وهتديك error' },
+      { text: 'مجرد تقليد في الكتابة عند المبرمجين وملوش معنى حقيقي في الكود' }
     ], answer: 1, explain: 'العمليات البطيئة (شبكة، ملفات، قواعد بيانات) بترجع Future، و await بتستناها بشكل غير معطل للواجهة.' }
   ],
   exercises: [
@@ -658,11 +658,11 @@ Future<void> main() async {
   final data = jsonDecode(response.body);
   print(data['title']);
 }`,
-      why: 'jsonplaceholder.typicode.com هو API تجريبي مجاني معمول بالظبط للتعلم — محفوظ في بوك مارك كل مبرمج تقريباً.' },
+      why: 'jsonplaceholder.typicode.com هو API تجريبي مجاني معمول بالظبط للتعلم, محفوظ في بوك مارك كل مبرمج تقريباً.' },
     { task: 'من غير ما تكتب كود: افتح pub.dev وادور على package مناسبة لكل حاجة من دول: (1) فتح لينك في المتصفح (2) حفظ تفضيلات المستخدم (3) تشغيل فيديو. اكتب اسم كل package.', hint: 'ابحث بكلمات إنجليزية بسيطة زي open url و save settings.', code: `الإجابة النموذجية:
-1. url_launcher — لفتح اللينكات
-2. shared_preferences — لحفظ الإعدادات البسيطة
-3. video_player — لتشغيل الفيديوهات
+1. url_launcher, لفتح اللينكات
+2. shared_preferences, لحفظ الإعدادات البسيطة
+3. video_player, لتشغيل الفيديوهات
 
 (التلاتة من الحزم الرسمية بتاعة فريق Flutter نفسه)`,
       why: 'مهارة "إزاي ألاقي الـ package الصح" أهم من حفظ أسماء المكتبات: بحث كويس + قراءة الـ README + نظرة على الـ likes.' }
@@ -672,7 +672,7 @@ Future<void> main() async {
   id: 'capstone',
   nav: 'المشروع الختامي',
   title: 'المشروع الختامي: تطبيق ملاحظات كامل',
-  subtitle: 'هنبني تطبيق ملاحظات فيه شاشتين وقايمة وإضافة وحذف — بكل اللي اتعلمناه',
+  subtitle: 'هنبني تطبيق ملاحظات فيه شاشتين وقايمة وإضافة وحذف, بكل اللي اتعلمناه',
   blocks: [
     { type: 'p', text: 'وصلت للنهاية! المشروع ده بيجمع كل اللي فات في تطبيق حقيقي واحد: تطبيق ملاحظات فيه شاشة رئيسية بقايمة الملاحظات (ListView.builder)، وشاشة إضافة ملاحظة (Form + TextField)، وتنقل بينهم بإرسال نتيجة (Navigator + await)، وتحديث القايمة (setState)، وثيم موحد (ThemeData).' },
     { type: 'h', text: 'الخطة قبل الكود' },
@@ -728,7 +728,7 @@ class _NotesScreenState extends State<NotesScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('ملاحظاتي')),
       body: notes.isEmpty
-          ? const Center(child: Text('مفيش ملاحظات لسه — دوس + وضيف أول واحدة'))
+          ? const Center(child: Text('مفيش ملاحظات لسه, دوس + وضيف أول واحدة'))
           : ListView.builder(
               itemCount: notes.length,
               itemBuilder: (context, index) {
@@ -816,14 +816,14 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
     );
   }
 }` },
-    { type: 'p', text: 'زرار الحفظ بيعمل `pop` وبيبعت `controller.text` معاه — والشاشة الأولى مستنياه بـ await وتضيفه للقايمة. كده الدورة كملت: إدخال ← تنقل ← نتيجة ← تحديث واجهة.' },
+    { type: 'p', text: 'زرار الحفظ بيعمل `pop` وبيبعت `controller.text` معاه, والشاشة الأولى مستنياه بـ await وتضيفه للقايمة. كده الدورة كملت: إدخال ← تنقل ← نتيجة ← تحديث واجهة.' },
     { type: 'h', text: 'شغل المشروع واختبره' },
     { type: 'list', items: [
       'القايمة فاضية؟ المفروض تشوف رسالة "مفيش ملاحظات لسه".',
-      'دوس +، اكتب ملاحظة، احفظ — المفروض تظهر في القايمة فوراً.',
-      'دوس على أيقونة السلة — الملاحظة بتتمسح فوراً.',
-      'فعّل الوضع الليلي من إعدادات الجهاز — التطبيق المفروض يتبعه.',
-      'ضيف ملاحظات كتير أوي — القايمة المفروض تعمل scroll طبيعي (دي نعمة ListView.builder).'
+      'دوس +، اكتب ملاحظة، احفظ, المفروض تظهر في القايمة فوراً.',
+      'دوس على أيقونة السلة, الملاحظة بتتمسح فوراً.',
+      'فعّل الوضع الليلي من إعدادات الجهاز, التطبيق المفروض يتبعه.',
+      'ضيف ملاحظات كتير أوي, القايمة المفروض تعمل scroll طبيعي (دي نعمة ListView.builder).'
     ] },
     { type: 'h', text: 'تحديات إضافية لو عايز تكمل' },
     { type: 'list', items: [
@@ -832,26 +832,26 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
       'خلّي الدوس على الملاحظة يفتح شاشة تعديل بدل الحذف المباشر.',
       'ضيف تأكيد قبل الحذف بـ AlertDialog.'
     ] },
-    { type: 'note', text: 'مبروك! لو وصلت لهنا وعملت المشروع، انت عديت من الصفر لبناء تطبيق Flutter حقيقي متعدد الشاشات. الخطوة الجاية الطبيعية: توثيق Flutter الرسمي على docs.flutter.dev وفيه codelabs عملية مجانية، وابدأ فكر في مشروع من دماغك انت — دي أسرع طريقة للاحتراف.' }
+    { type: 'note', text: 'مبروك! لو وصلت لهنا وعملت المشروع، انت عديت من الصفر لبناء تطبيق Flutter حقيقي متعدد الشاشات. الخطوة الجاية الطبيعية: توثيق Flutter الرسمي على docs.flutter.dev وفيه codelabs عملية مجانية، وابدأ فكر في مشروع من دماغك انت, دي أسرع طريقة للاحتراف.' }
   ],
   quiz: [
     { q: 'في التطبيق، شاشة الإضافة بترجع نص الملاحظة للشاشة الرئيسية إزاي؟', options: [
       { text: 'بـ Navigator.pop(context, controller.text) والشاشة الأولى بتستقبله بـ await' },
-      { text: 'بتحفظه في ملف نصي والشاشة الأولى بتقراه' },
-      { text: 'بـ print والشاشة الأولى بتسمعه' },
-      { text: 'مش بترجعه، الشاشة الأولى بتخمنه' }
+      { text: 'بتحفظه في ملف نصي على الموبايل والشاشة الأولى بتقراه بعد كده' },
+      { text: 'بـ print والشاشة الأولى بتسمع النص من الـ console مباشرة' },
+      { text: 'مش بترجعه، الشاشة الأولى بتخمنه من آخر حاجة اتكتبت في التطبيق' }
     ], answer: 0, explain: 'نفس فكرة درس التنقل: pop بتحمل النتيجة و await في الشاشة الأولى بيستقبلها، وبعدين setState بيضيفها للقايمة.' },
     { q: 'ليه الشاشة الرئيسية StatefulWidget مش Stateless؟', options: [
-      { text: 'لأن فيها AppBar' },
+      { text: 'لأن الشاشة فيها AppBar والـ AppBar محتاج يتحدث مع كل تغيير' },
       { text: 'لأن قايمة الملاحظات بتتغير (إضافة وحذف) والواجهة لازم تتحدث معاها' },
-      { text: 'لأن Stateful أسرع في الأداء' },
-      { text: 'أي شاشة لازم تكون Stateful' }
-    ], answer: 1, explain: 'القايمة notes بتتغير مع كل إضافة وحذف — دي state، فمحتاجين StatefulWidget و setState عشان الواجهة تتحدث.' },
+      { text: 'لأن Stateful أسرع في الأداء من Stateless في كل الحالات' },
+      { text: 'لأن أي شاشة في أي تطبيق لازم تكون Stateful بدون استثناء' }
+    ], answer: 1, explain: 'القايمة notes بتتغير مع كل إضافة وحذف, دي state، فمحتاجين StatefulWidget و setState عشان الواجهة تتحدث.' },
     { q: 'الشرط `notes.isEmpty ? ... : ListView.builder(...)` بيعمل إيه؟', options: [
-      { text: 'بيخفي التطبيق لما القايمة فاضية' },
+      { text: 'بيخفي التطبيق كله لما القايمة تبقى فاضية وبيرجعه لما تتملي' },
       { text: 'بيعرض رسالة ترشد المستخدم لما القايمة فاضية، والقايمة نفسها لما يكون فيها عناصر' },
-      { text: 'بيمسح الملاحظات القديمة' },
-      { text: 'بيمنع إضافة ملاحظات جديدة' }
+      { text: 'بيمسح الملاحظات القديمة أوتوماتيك لما القايمة تتملي بعناصر جديدة' },
+      { text: 'بيمنع إضافة ملاحظات جديدة طول ما القايمة فاضية أو لسه محملتش' }
     ], answer: 1, explain: 'الواجهة بتعكس الحالة: قايمة فاضية يعني رسالة، قايمة مليانة يعني ListView. ده الـ declarative UI عملياً.' }
   ],
   exercises: [
@@ -860,7 +860,7 @@ main + NotesApp، NotesScreen، AddNoteScreen).
 انسخهم بالترتيب في lib/main.dart وشغل:
 flutter run -d chrome`,
       why: 'إعادة الكتابة من الذاكرة (حتى لو غلطت ورجعت بصيت) بتثبت المعلومة أضعاف النسخ المباشر.' },
-    { task: 'نفّذ واحد من "التحديات الإضافية" — الأسهل هو AlertDialog للتأكيد قبل الحذف.', hint: 'showDialog بترجع Future زي Navigator.push بالظبط — استنى نتيجتها بـ await.', code: `trailing: IconButton(
+    { task: 'نفّذ واحد من "التحديات الإضافية", الأسهل هو AlertDialog للتأكيد قبل الحذف.', hint: 'showDialog بترجع Future زي Navigator.push بالظبط, استنى نتيجتها بـ await.', code: `trailing: IconButton(
   icon: const Icon(Icons.delete),
   onPressed: () async {
     final sure = await showDialog<bool>(

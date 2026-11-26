@@ -895,6 +895,251 @@ CURRICULUM.push(
  ]
 },
 {
+ "id": "http-apis",
+ "nav": "الـ HTTP والـ APIs",
+ "title": "الـ HTTP والـ APIs: اجيب داتا حقيقية من الإنترنت",
+ "subtitle": "Future و async/await و jsonDecode و FutureBuilder",
+ "blocks": [
+  {
+   "type": "p",
+   "text": "لحد دلوقتي كل الداتا في تطبيقاتنا مكتوبة جوه الكود. التطبيقات الحقيقية بتجيب داتاها من الإنترنت: أخبار، أسعار، منتجات، مستخدمين. المكان ده اسمه API: خدمة على سيرفر بترد على طلبات منظمة ببيانات منظمة، وأشهر صيغة للبيانات دي هي JSON."
+  },
+  {
+   "type": "h",
+   "text": "الـ Future: نتيجة جاية في السكة"
+  },
+  {
+   "type": "p",
+   "text": "طلب الإنترنت بياخد وقت (جزء من ثانية لثواني)، وFlutter مش بيوقف التطبيق كله يستنى. عشان كده أي عملية زي دي بترجع Future: وعد بقيمة هتوصل بعدين. بنستقبل الوعد ده بـ await جوه دالة معلمة بـ async، زي ما بنعمل بالظبط مع Navigator.push اللي بيرجع نتيجة."
+  },
+  {
+   "type": "code",
+   "code": "Future<String> fetchUserName() async {\n  await Future.delayed(Duration(seconds: 2)); // محاكاة طلب شبكة\n  return 'أحمد';\n}\n\nvoid main() async {\n  print('بنحمل...');\n  final name = await fetchUserName();\n  print(name); // بتتطبع بعد ثانيتين\n}"
+  },
+  {
+   "type": "h",
+   "text": "أول طلب HTTP حقيقي بـ package الـ http"
+  },
+  {
+   "type": "p",
+   "text": "ضيف الـ package في pubspec.yaml تحت dependencies: http: ^1.2.0 وبعدين اعمل flutter pub get. وفي أندرويد لازم إذن الإنترنت: افتح android/app/src/main/AndroidManifest.xml وضيف <uses-permission android:name=\"android.permission.INTERNET\"/> فوق الـ application tag. (الـ debug build فيه الإذن جاهز، بس الـ release لأ، ودي بتنسى فخليها في دماغك)."
+  },
+  {
+   "type": "code",
+   "code": "import 'dart:convert';\nimport 'package:http/http.dart' as http;\n\nFuture<List<dynamic>> fetchPosts() async {\n  final url = Uri.parse('https://jsonplaceholder.typicode.com/posts');\n  final response = await http.get(url);\n\n  if (response.statusCode == 200) {\n    return jsonDecode(response.body); // قائمة جاهزة من الـ JSON\n  } else {\n    throw Exception('السيرفر رد بـ ${response.statusCode}');\n  }\n}"
+  },
+  {
+   "type": "p",
+   "text": "التلات خطوات اللي بيتكرروا في كل API: (1) اعمل Uri من الـ String بـ Uri.parse، (2) ابعت الطلب بـ http.get واستنى الرد، (3) فك الرد من نص JSON لقوائم وخرائط Dart بـ jsonDecode. ولاحظ: نجاح الطلب مش معناه نجاح العملية، لازم تتأكد من statusCode بنفسك، 200 معناها تمام."
+  },
+  {
+   "type": "h",
+   "text": "العرض في الشاشة: FutureBuilder"
+  },
+  {
+   "type": "code",
+   "code": "FutureBuilder<List<dynamic>>(\n  future: fetchPosts(),\n  builder: (context, snapshot) {\n    if (snapshot.connectionState == ConnectionState.waiting) {\n      return Center(child: CircularProgressIndicator());\n    }\n    if (snapshot.hasError) {\n      return Center(child: Text('حصلت مشكلة، حاول تاني'));\n    }\n    final posts = snapshot.data!;\n    return ListView.builder(\n      itemCount: posts.length,\n      itemBuilder: (context, i) => ListTile(\n        title: Text(posts[i]['title']),\n      ),\n    );\n  },\n)"
+  },
+  {
+   "type": "p",
+   "text": "FutureBuilder بيراقب الـ Future ويعيد بناء الواجهة لما حالتها تتغير: لسه بيحمل؟ اعرض دايرة تحميل. حصل خطأ؟ اعرض رسالة لائقة. الداتا وصلت؟ اعرضها في ListView.builder زي ما اتعلمنا. دي دورة حياة أي شاشة فيها داتا من إنترنت، وحفظ الفكرة دي بيوفر عليك لخبطة كتير."
+  },
+  {
+   "type": "note",
+   "text": "غلطة شهيرة: تنادي fetchPosts() جوه build مباشرة. كل إعادة بناء للشاشة هتبعت طلب جديد! خزن الـ Future في متغير (في initState مثلاً) واديه لـ FutureBuilder."
+  },
+  {
+   "type": "h",
+   "text": "من JSON لكلاس Dart (في الشغل الجاد)"
+  },
+  {
+   "type": "p",
+   "text": "الوصول المباشر زي posts[i]['title'] شغال، بس أي غلطة في اسم الحقل مش هتظهر إلا وقت التشغيل. في المشاريع الجادة بنعمل كلاس (Model) فيه factory من اسمه fromJson بيحول الـ Map لكائن له خواص مكتوبة صح. الفكرة دي هتلاقيها في أي مشروع منشور، والـ packages زي json_serializable بتكتب الكود ده عنك."
+  },
+  {
+   "type": "h",
+   "text": "قواعد الشغل مع الـ APIs"
+  },
+  {
+   "type": "list",
+   "items": [
+    "افترض إن الطلب ممكن يفشل دايماً: نت فاصل، سيرفر واقع، رد بطيء. try/catch ورسالة محترمة للمستخدم مش رفاهية.",
+    "ماتحطش مفاتيح APIs سرية جوه كود التطبيق اللي هيتنشر: أي حد يفك التطبيق يشوفها.",
+    "اقرأ الـ documentation بتاع الـ API الأول: شكل الرد، حدود الاستخدام (rate limits)، والمصادقة المطلوبة.",
+    "JSONPlaceholder اللي استخدمناه هنا API تدريبي مجاني معمول عشان التجريب، مناسب جداً لأول مرة."
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "q": "ليه طلبات الإنترنت في Dart بترجع Future مش القيمة مباشرة؟",
+   "options": [
+    {
+     "text": "لأن الطلب بياخد وقت، والـ Future وعد بقيمة هتوصل من غير ما توقف التطبيق كله"
+    },
+    {
+     "text": "لأن الـ Future أسرع في التنفيذ من القيم العادية"
+    },
+    {
+     "text": "لأن داتا الإنترنت دايماً مشفرة ولازم تتفك الأول"
+    },
+    {
+     "text": "لأن Dart مبتدعمش القيم العادية في الدوال"
+    }
+   ],
+   "answer": 0,
+   "explain": "الشبكة بطيئة وغير مضمونة. الـ Future بيخلي التطبيق شغال ويرد على المستخدم لحد ما الرد يوصل، وبعدين بيسلملك القيمة."
+  },
+  {
+   "q": "await بتشتغل فين بس؟",
+   "options": [
+    {
+     "text": "جوا دالة معلمة بـ async"
+    },
+    {
+     "text": "في أي سطر في الملف"
+    },
+    {
+     "text": "جوا main بس"
+    },
+    {
+     "text": "جوا build بس"
+    }
+   ],
+   "answer": 0,
+   "explain": "من غير async في تعريف الدالة، المترجم هيرفض await. دي أول غلطة هتقابلها لو نسيتها."
+  },
+  {
+   "q": "response.statusCode == 200 معناها إيه؟",
+   "options": [
+    {
+     "text": "الطلب نجح والسيرفر رد باللي المفروض نستخدمه"
+    },
+    {
+     "text": "السيرفر مش لاقي الصفحة المطلوبة"
+    },
+    {
+     "text": "الطلب اتبعت بس مفيش رد لسه"
+    },
+    {
+     "text": "الإنترنت فصل في نص الطلب"
+    }
+   ],
+   "answer": 0,
+   "explain": "200 هو كود النجاح في HTTP. 404 مش موجود، 500 مشكلة في السيرفر نفسه. عشان كده منتحققش من الرد قبل ما نستخدمه."
+  },
+  {
+   "q": "jsonDecode(response.body) بتعمل إيه؟",
+   "options": [
+    {
+     "text": "بتحول نص الـ JSON لقوائم وخرائط Dart تقدر تتعامل معاها"
+    },
+    {
+     "text": "بتضغط حجم الرد عشان يوفر باقة النت"
+    },
+    {
+     "text": "بتشفر البيانات قبل ما تتخزن على الجهاز"
+    },
+    {
+     "text": "بترسل الرد تاني للسيرفر للتأكيد"
+    }
+   ],
+   "answer": 0,
+   "explain": "الرد بيوصل كنص طويل. jsonDecode بيفكه لـ List و Map، فتقدر تكتب posts[i]['title'] عادي."
+  },
+  {
+   "q": "إيه الحالات التلاتة اللي FutureBuilder بيخليك تتعامل معاهم في أي شاشة داتا؟",
+   "options": [
+    {
+     "text": "التحميل (waiting)، الخطأ (hasError)، ووصول الداتا (hasData)"
+    },
+    {
+     "text": "البداية والنص والنهاية"
+    },
+    {
+     "text": "فتح التطبيق وقفله وتحديثه"
+    },
+    {
+     "text": "الواي فاي وباقة الموبايل ووضع الطيران"
+    }
+   ],
+   "answer": 0,
+   "explain": "أي شاشة فيها طلب شبكة ليها التلات حالات دول. FutureBuilder بيديك snapshot تفحصه وتقرر يظهر إيه في كل واحدة."
+  },
+  {
+   "q": "ليه غلط ننادي دالة الـ fetch جوه build مباشرة؟",
+   "options": [
+    {
+     "text": "لأن build بتتنادى كتير مع كل تحديث للشاشة، فهيبتتبعت طلبات مكررة من غير داعي"
+    },
+    {
+     "text": "لأن build مبتقبلش دوال أصلاً"
+    },
+    {
+     "text": "لأن الطلبات جوه build بتتنفذ على موبايل المستخدم بس"
+    },
+    {
+     "text": "مفيش مشكلة، دي الطريقة الرسمية الموصى بيها"
+    }
+   ],
+   "answer": 0,
+   "explain": "الحل: اعمل الـ Future مرة واحدة (في initState مثلاً) وخزنه في متغير، وسلم المتغير ده لـ FutureBuilder."
+  },
+  {
+   "q": "في أندرويد، إيه الإذن اللي لازم يتضاف عشان تطبيقك يقدر يوصل للإنترنت في نسخة الـ release؟",
+   "options": [
+    {
+     "text": "uses-permission android.permission.INTERNET في ملف AndroidManifest.xml"
+    },
+    {
+     "text": "uses-permission android.permission.CAMERA"
+    },
+    {
+     "text": "مفيش إذن مطلوب أبداً للإنترنت"
+    },
+    {
+     "text": "إذن خاص بيتاخد من جوجل بلاي بعد النشر"
+    }
+   ],
+   "answer": 0,
+   "explain": "نسخة الـ debug فيها الإذن جاهز عشان التجريب، بس الـ release لازم تضيفه بنفسك في الـ manifest وإلا الطلبات هتفشل في صمت."
+  },
+  {
+   "q": "ليه الأفضل تعمل كلاس Model بـ fromJson بدل الوصول المباشر للـ Map؟",
+   "options": [
+    {
+     "text": "عشان الأخطاء في أسماء الحقول تظهر وقت الكتابة مش وقت التشغيل، والكود يبقى أوضح"
+    },
+    {
+     "text": "عشان الـ Map مبتتطبعش في الـ console"
+    },
+    {
+     "text": "عشان الـ Model أسرع من الـ Map في الذاكرة دايماً"
+    },
+    {
+     "text": "عشان Dart مش بتدعم الـ Map في التطبيقات المنشورة"
+    }
+   ],
+   "answer": 0,
+   "explain": "posts[i]['titel'] غلطة إملائية هتعدي عادي وتنفجر وقت التشغيل. في الـ Model، الخاصية ليها اسم ثابت والمترجم بيمسك الغلطات."
+  }
+ ],
+ "exercises": [
+  {
+   "task": "افتح اللينك ده في متصفحك الأول وشوف شكل الرد بعينك: https://jsonplaceholder.typicode.com/users وبعدين اكتب دالة fetchUsers بترجع قائمة المستخدمين، واطبع اسم أول مستخدم في الـ console.",
+   "hint": "الرد قائمة، كل عنصر فيها Map فيه name و email و company.",
+   "code": "Future<List<dynamic>> fetchUsers() async {\n  final url = Uri.parse('https://jsonplaceholder.typicode.com/users');\n  final response = await http.get(url);\n  if (response.statusCode == 200) {\n    return jsonDecode(response.body);\n  }\n  throw Exception('فشل التحميل');\n}\n\n// في زرار أو initState:\nfinal users = await fetchUsers();\nprint(users[0]['name']);",
+   "why": "شوف الرد في المتصفح الأول دي عادة مهمة: بتعرف شكل الداتا الحقيقي قبل ما تكتب سطر كود، بدل التخمين وتصحيح الأغلاط."
+  },
+  {
+   "task": "ضيف شاشة في تطبيق الملاحظات بتاعك (أو تطبيق جديد) اسمها شاشة الأخبار، بتجيب posts من JSONPlaceholder وتعرض عناوينها في ListView مع مؤشر تحميل ورسالة خطأ.",
+   "hint": "FutureBuilder + ListView.builder + CircularProgressIndicator، التلاتة اللي في الدرس.",
+   "code": "// الهيكل الكامل:\n// 1. متغير future بيتعمل مرة واحدة في initState\n// 2. FutureBuilder بيفحص snapshot\n// 3. waiting -> CircularProgressIndicator\n// 4. hasError -> Text برسالة محترمة + زرار إعادة\n// 5. hasData -> ListView.builder بعناوين الـ posts",
+   "why": "الشاشة دي قالب هتعيد استخدامه في أي تطبيق فيه داتا من إنترنت. نفذها مرة بإيدك وهتلاقي كل شاشة بعدها نفس الخطوات."
+  }
+ ]
+},
+{
  "id": "capstone",
  "nav": "المشروع الختامي",
  "title": "المشروع الختامي: تطبيق ملاحظات كامل",
